@@ -22,8 +22,11 @@
     "plugins": [
       {
         "name": "next"
-      }
-    ]
+      },
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.mjs", "vitest.config.ts", ".next/types/**/*.ts", "eslint.config.mjs"],
   "exclude": ["node_modules"]
