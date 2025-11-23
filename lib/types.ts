@@ -1,6 +1,5 @@
 export type GenerationStatus = "pending" | "generating" | "completed" | "failed";
 
-
 export interface GenerationJob {
   id: string;
   prompt: string;

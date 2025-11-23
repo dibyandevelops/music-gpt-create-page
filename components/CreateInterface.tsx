@@ -5,6 +5,7 @@ import { useState } from "react"
 import { DURATION_OPTIONS, GENRE_OPTIONS, INSTRUMENT_OPTIONS, MOOD_OPTIONS } from "@/lib/constants"
 import { GenerationJob, GenerationStatus } from "@/lib/types";
 import { formatTimestamp } from "@/lib/utils";
+import { useGenerationStore } from "@/store /useGenerationStore";
 import { cn } from "./StatusPill/cn";
 import StatusPill from "./StatusPill/StatusPill";
 
@@ -26,7 +27,7 @@ const statusAccent: Record<GenerationStatus, string> = {
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface ICreateInterfaceProps {}
 const CreateInterface: React.FunctionComponent<ICreateInterfaceProps> = (props) => {
-  const { error, form, submitting, setForm } = useGenerationForm()
+  const { error, form, submitting, setForm, handleSubmit, items: generatedItems } = useGenerationForm()
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
       <BackgroundAura />
@@ -40,14 +41,14 @@ const CreateInterface: React.FunctionComponent<ICreateInterfaceProps> = (props) 
               error={error}
               submitting={submitting}
               setForm={setForm}
-              onSubmit={() => {}}
+              onSubmit={handleSubmit}
             />
           </motion.div>
            <motion.div
             layout
             className="space-y-5 rounded-3xl border border-white/10 bg-slate-900/70 p-5 shadow-[0_0_60px_rgba(96,165,250,0.15)]"
           >
-            <GenerationQueue items={[]} />
+            <GenerationQueue items={generatedItems} />
           </motion.div>
         </section>
       </div>
@@ -59,6 +60,37 @@ const useGenerationForm = () => {
   const [form, setForm] = useState(defaultFormState);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { upsert, items } = useGenerationStore((state) => state)
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!form.prompt.trim()) {
+      setError("Describe the sound you want to generate.");
+      return;
+    }
+    setError(null);
+    setSubmitting(true);
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed request");
+      }
+
+      const job = (await response.json()) as GenerationJob;
+      upsert(job);
+      setForm((prev) => ({ ...prev, prompt: "" }));
+    } catch {
+      setError("We could not queue that request. Try again in a moment.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
 
   return {
     form,
@@ -67,6 +99,8 @@ const useGenerationForm = () => {
     setSubmitting,
     error,
     setError,
+    handleSubmit,
+    items
   }
 }
 const BackgroundAura = () => (
