@@ -1,4 +1,5 @@
 import { GenerationStatus } from "./types";
+import { randomFrom } from "./utils";
 
 export const GENRE_OPTIONS = [
   "Hyperpop Pulse",
@@ -17,6 +18,8 @@ export const MOOD_OPTIONS = [
   "Nocturnal",
   "Playful",
 ];
+
+export const generationStatus = ["pending", "generating", "completed", "failed"]
 
 export const DURATION_OPTIONS = ["30 sec", "45 sec", "60 sec", "90 sec"];
 
@@ -45,10 +48,27 @@ export const STEPS: Array<{ delay: number; status: GenerationStatus; progress: n
 export const SAMPLE_URLS = [
   // SoundHelix - freely available example tracks
   "https://soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-  // File-Examples - small sample MP3
-  "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3",
-  // University of Illinois demo audio
-  "https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.mp3",
-  // Wikimedia Commons example OGG (public domain/demo)
-  "https://upload.wikimedia.org/wikipedia/commons/c/c8/Example.ogg",
+  // SoundHelix - freely available example tracks
+  "https://soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  // SoundHelix - freely available example tracks
+  "https://soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  // SoundHelix - freely available example tracks
+  "https://soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  // SoundHelix - freely available example tracks
+  "https://soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
 ];
+
+export const defaultFormState = {
+  prompt: "",
+  style: randomFrom(GENRE_OPTIONS),
+  mood: randomFrom(MOOD_OPTIONS),
+  duration: randomFrom(DURATION_OPTIONS),
+  instrumentation: randomFrom(INSTRUMENT_OPTIONS),
+}
+
+export const statusAccent: Record<GenerationStatus, string> = {
+  pending: "from-blue-500/60 to-indigo-400/20",
+  generating: "from-amber-400/60 to-rose-400/20",
+  completed: "from-emerald-400/70 to-cyan-400/20",
+  failed: "from-red-500/70 to-orange-400/20",
+}

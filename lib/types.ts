@@ -1,3 +1,5 @@
+import { defaultFormState } from "@/lib/constants"
+
 export type GenerationStatus = "pending" | "generating" | "completed" | "failed";
 
 export interface GenerationJob {
@@ -27,3 +29,5 @@ export interface CreateGenerationPayload {
   instrumentation: string;
 }
 
+
+export type FormState = typeof defaultFormState;

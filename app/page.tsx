@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
 }
 
-const CreateInterface = dynamic(() => import("@/components/CreateInterface"))
+const CreateInterface = dynamic(() => import("@/components/CreateInterface/CreateInterface"))
 
 
 export default function Web() {
