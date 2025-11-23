@@ -1,8 +1,10 @@
+/* eslint-disable no-var */
 // TODO: Add socket server
 import { Server } from "socket.io";
 import { SOCKET_PORT } from "@/lib/constants";
 import type { GenerationJob } from "@/lib/types";
-import { sortByNewest } from "../utils";
+import { sortByNewest } from "@/lib/utils";
+
 
 declare global {
   var __music_socket__: Server | undefined;

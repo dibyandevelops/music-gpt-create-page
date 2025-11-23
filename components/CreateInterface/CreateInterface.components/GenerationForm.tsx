@@ -29,7 +29,7 @@ export const GenerationForm = ({
           rows={4}
           value={form.prompt}
           onChange={(event) => setField("prompt")(event.target.value)}
-          placeholder="E.g. Neon drenched club drop with cyberpunk strings and air-raid risers..."
+          placeholder="E.g. Lo-Fi Instrumental song"
           className="w-full rounded-2xl border border-white/10 bg-slate-900/70 p-4 text-base text-white placeholder:text-white/30 focus:border-sky-400 focus:outline-none"
         />
       </label>

@@ -1,12 +1,13 @@
 import {
   STEPS,
 } from "@/lib/constants";
-import { ensureSocketServer, writeJob } from "@/lib/server/socket-server";
 import type {
   CreateGenerationPayload,
   GenerationJob,
 } from "@/lib/types";
-import { attachPreview, buildJob } from "../utils";
+import { attachPreview, buildJob } from "@/lib/utils";
+import { ensureSocketServer, writeJob } from "./socket-server";
+
 
 export const createGenerationJob = async (
   payload: CreateGenerationPayload,
