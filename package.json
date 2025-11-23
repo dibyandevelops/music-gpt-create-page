@@ -55,7 +55,11 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwind-merge": "^2.6.0",
-    "zod": "^3.24.4"
+    "zod": "^3.24.4",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "zustand": "^5.0.8",
+    "framer-motion": "^12.23.24"
   },
   "devDependencies": {
     "@babel/core": "^7.27.1",

@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
   title: "Music GPT",
@@ -17,10 +18,13 @@ export const metadata: Metadata = {
   },
 }
 
+const CreateInterface = dynamic(() => import("@/components/CreateInterface"))
+
+
 export default function Web() {
   return (
     <>
-      <div>Page Content</div>
+      <CreateInterface />
     </>
   )
 }
