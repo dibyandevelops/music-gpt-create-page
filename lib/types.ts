@@ -1,5 +1,6 @@
 export type GenerationStatus = "pending" | "generating" | "completed" | "failed";
 
+
 export interface GenerationJob {
   id: string;
   prompt: string;
@@ -18,3 +19,12 @@ export interface GenerationJob {
   audioUrl?: string;
   error?: string;
 }
+
+export interface CreateGenerationPayload {
+  prompt: string;
+  mood: string;
+  style: string;
+  duration: string;
+  instrumentation: string;
+}
+
