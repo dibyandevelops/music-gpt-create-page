@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import * as React from 'react';
 import { useState } from "react"
+import { useGenerationSocket } from "@/hooks/useGenerationSocket";
 import { DURATION_OPTIONS, GENRE_OPTIONS, INSTRUMENT_OPTIONS, MOOD_OPTIONS } from "@/lib/constants"
 import { GenerationJob, GenerationStatus } from "@/lib/types";
 import { formatTimestamp } from "@/lib/utils";
@@ -27,6 +28,7 @@ const statusAccent: Record<GenerationStatus, string> = {
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface ICreateInterfaceProps {}
 const CreateInterface: React.FunctionComponent<ICreateInterfaceProps> = (props) => {
+  useGenerationSocket();
   const { error, form, submitting, setForm, handleSubmit, items: generatedItems } = useGenerationForm()
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
